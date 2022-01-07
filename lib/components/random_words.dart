@@ -29,17 +29,6 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildRow(WordPair wordPair) {
-    // return ListTile(
-    //   title: Text(
-    //     wordPair.toString(),
-    //     textAlign: TextAlign.center,
-    //     style: const TextStyle(
-    //         color: Colors.teal,
-    //         fontSize: 18.0,
-    //         fontWeight: FontWeight.bold,
-    //         fontStyle: FontStyle.italic),
-    //   ),
-    // );
     return Text.rich(
       TextSpan(text: 'Word ', children: <TextSpan>[
         TextSpan(

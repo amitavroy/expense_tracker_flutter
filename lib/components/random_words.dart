@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +10,6 @@ class RandomWords extends StatefulWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 18.0);
 
   Widget __buildSuggestions() {
     return ListView.builder(

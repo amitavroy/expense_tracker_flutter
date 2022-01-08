@@ -17,18 +17,19 @@ class _ExpenseListWidgetState extends State<ExpenseList> {
       body: Center(
         child: Text('Hello, this is my Expense list. Counter $_count'),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Container(
-          height: 50,
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.business), label: 'Dashboard'),
+          BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Expenses'),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'More'),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => setState(() => _count++),
         tooltip: 'Increment counter',
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

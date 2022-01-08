@@ -1,21 +1,23 @@
+import 'package:expense_tracker/components/expense_card.dart';
+import 'package:expense_tracker/components/expense_list.dart';
 import 'package:flutter/material.dart';
 
-class ExpenseList extends StatefulWidget {
-  const ExpenseList({Key? key}) : super(key: key);
+class Expenses extends StatefulWidget {
+  const Expenses({Key? key}) : super(key: key);
 
   @override
-  State<ExpenseList> createState() => _ExpenseListWidgetState();
+  State<Expenses> createState() => _ExpensesWidgetState();
 }
 
-class _ExpenseListWidgetState extends State<ExpenseList> {
+class _ExpensesWidgetState extends State<Expenses> {
   int _count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('My expenses')),
-      body: Center(
-        child: Text('Hello, this is my Expense list. Counter $_count'),
+      body: const Center(
+        child: ExpenseList(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

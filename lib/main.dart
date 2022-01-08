@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:expense_tracker/components/random_words.dart';
+import 'package:expense_tracker/pages/expense_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,16 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Welcome to Flutter'),
-        ),
-        body: const Center(
-          child: RandomWords(),
-        ),
-      ),
-    );
+    return Builder(builder: (context) {
+      return MaterialApp(
+          title: 'Welcome to Flutter',
+          theme: ThemeData(primarySwatch: Colors.blue),
+          home: const ExpenseList());
+    });
   }
 }

@@ -45,9 +45,15 @@ class _ExpenseListState extends State<ExpenseList> {
           List<Expense>? expense = snapshot.data;
           return ListView.builder(
             itemBuilder: (BuildContext context, int index) {
-              return ExpenseCard(
-                  expense: Expense(
-                      id: expense![index].id, name: expense[index].name));
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Divider(),
+                  ExpenseCard(
+                      expense: Expense(
+                          id: expense![index].id, name: expense[index].name))
+                ],
+              );
             },
             itemCount: expense?.length,
           );

@@ -12,7 +12,7 @@ class ExpenseCard extends StatelessWidget {
     return GestureDetector(
       child: Container(
         padding: const EdgeInsets.all(18.0),
-        child: Text(expense.name.toUpperCase()),
+        child: Text(expense.description.toUpperCase()),
       ),
       onTap: () {
         Navigator.push(

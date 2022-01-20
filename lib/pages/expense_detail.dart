@@ -8,9 +8,9 @@ class ExpenseDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(expense.name)),
+      appBar: AppBar(title: Text(expense.description)),
       body: Center(
-        child: Text(expense.name),
+        child: Text(expense.description),
       ),
     );
   }

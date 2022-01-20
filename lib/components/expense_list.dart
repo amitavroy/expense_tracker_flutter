@@ -15,7 +15,7 @@ class ExpenseList extends StatefulWidget {
 
 Future<List<Expense>> fetchExpense() async {
   final response =
-      await http.get(Uri.parse("https://jsonplaceholder.typicode.com/users"));
+      await http.get(Uri.parse("http://192.168.1.7/api/v1/expense"));
 
   // Expense expense = Expense(id: d['id'], name: d['name']);
   if (response.statusCode == 200) {
@@ -51,7 +51,11 @@ class _ExpenseListState extends State<ExpenseList> {
                   const Divider(),
                   ExpenseCard(
                       expense: Expense(
-                          id: expense![index].id, name: expense[index].name))
+                          id: expense![index].id,
+                          description: expense[index].description,
+                          userId: expense[index].userId,
+                          amount: expense[index].amount,
+                          createdAt: expense[index].createdAt))
                 ],
               );
             },

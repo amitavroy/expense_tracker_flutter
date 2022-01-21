@@ -20,6 +20,7 @@ Future<List<Expense>> fetchExpense() async {
   // Expense expense = Expense(id: d['id'], name: d['name']);
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
+    print(jsonResponse);
     return jsonResponse.map((data) => Expense.fromJson(data)).toList();
   } else {
     log('Data failed to load');
@@ -38,36 +39,41 @@ class _ExpenseListState extends State<ExpenseList> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Expense>>(
-      future: expenses,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<Expense>? expense = snapshot.data;
-          return ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Divider(),
-                  ExpenseCard(
-                      expense: Expense(
-                          id: expense![index].id,
-                          description: expense[index].description,
-                          userId: expense[index].userId,
-                          amount: expense[index].amount,
-                          createdAt: expense[index].createdAt))
-                ],
+    return RefreshIndicator(
+        child: FutureBuilder<List<Expense>>(
+          future: fetchExpense(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Expense>? expense = snapshot.data;
+              return ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Divider(),
+                      ExpenseCard(
+                          expense: Expense(
+                              id: expense![index].id,
+                              description: expense[index].description,
+                              userId: expense[index].userId,
+                              amount: expense[index].amount,
+                              createdAt: expense[index].createdAt))
+                    ],
+                  );
+                },
+                itemCount: expense?.length,
               );
-            },
-            itemCount: expense?.length,
-          );
-          // return const Text('No data 1');
-        } else if (snapshot.hasError) {
-          return const Text('Data errro');
-        } else {
-          return const CircularProgressIndicator();
-        }
-      },
-    );
+              // return const Text('No data 1');
+            } else if (snapshot.hasError) {
+              return const Text('Data errro');
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
+        ),
+        onRefresh: () {
+          setState(() {});
+          return fetchExpense();
+        });
   }
 }

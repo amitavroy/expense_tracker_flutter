@@ -1,5 +1,5 @@
-import 'package:expense_tracker/components/expense_card.dart';
 import 'package:expense_tracker/components/expense_list.dart';
+import 'package:expense_tracker/pages/add_expense.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
@@ -28,7 +28,10 @@ class _ExpensesWidgetState extends State<Expenses> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => _count++),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddExpense()));
+        },
         tooltip: 'Increment counter',
         child: const Icon(Icons.add),
       ),

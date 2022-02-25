@@ -15,12 +15,10 @@ class ExpenseList extends StatefulWidget {
 
 Future<List<Expense>> fetchExpense() async {
   final response =
-      await http.get(Uri.parse("http://192.168.1.7/api/v1/expense"));
+      await http.get(Uri.parse("http://192.168.0.193:8000/api/v1/expense"));
 
-  // Expense expense = Expense(id: d['id'], name: d['name']);
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
-    print(jsonResponse);
     return jsonResponse.map((data) => Expense.fromJson(data)).toList();
   } else {
     log('Data failed to load');

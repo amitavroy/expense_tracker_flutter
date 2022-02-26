@@ -28,52 +28,54 @@ class _ExpenseAddFormState extends State<ExpenseAddForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: TextFormField(
-              decoration: const InputDecoration(labelText: 'Description'),
-              onSaved: (value) {
-                formData['description'] = value;
-              },
-              validator: (value) {
-                return (value == null || value.isEmpty)
-                    ? 'Please enter text'
-                    : null;
-              },
-            ),
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(labelText: 'Description'),
+                  onSaved: (value) {
+                    formData['description'] = value;
+                  },
+                  validator: (value) {
+                    return (value == null || value.isEmpty)
+                        ? 'Please enter text'
+                        : null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(labelText: 'Amount'),
+                  onSaved: (value) {
+                    formData['amount'] = value;
+                  },
+                  validator: (value) {
+                    return (value == null || value.isEmpty)
+                        ? 'Please enter text'
+                        : null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      saveExpense(formData);
+                    }
+                  },
+                  child: const Text("Submit"),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Amount'),
-              onSaved: (value) {
-                formData['amount'] = value;
-              },
-              validator: (value) {
-                return (value == null || value.isEmpty)
-                    ? 'Please enter text'
-                    : null;
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  saveExpense(formData);
-                }
-              },
-              child: const Text("Submit"),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

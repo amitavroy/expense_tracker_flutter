@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:expense_tracker/pages/expenses.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class ExpenseAddForm extends StatefulWidget {
@@ -16,7 +17,8 @@ class _ExpenseAddFormState extends State<ExpenseAddForm> {
   final Map<String, dynamic> formData = {'description': null, 'amount': 0};
 
   saveExpense(Map<String, dynamic> data) async {
-    await http.post(Uri.parse('http://192.168.0.193:8000/api/v1/expense'),
+    String expenseAddApi = dotenv.get("API_HOST", fallback: "");
+    await http.post(Uri.parse(expenseAddApi + '/api/v1/expense'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

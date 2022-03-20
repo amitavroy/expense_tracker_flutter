@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:expense_tracker/components/expense_card.dart';
 import 'package:expense_tracker/types/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class ExpenseList extends StatefulWidget {
@@ -14,8 +15,9 @@ class ExpenseList extends StatefulWidget {
 }
 
 Future<List<Expense>> fetchExpense() async {
+  String expenseListApi = dotenv.get("API_HOST", fallback: "");
   final response =
-      await http.get(Uri.parse("http://192.168.0.193:8000/api/v1/expense"));
+      await http.get(Uri.parse(expenseListApi + "/api/v1/expense"));
 
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
